@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
     print(data);
 
     //set background
-    String bgImage = data['isDayTime'] ? 'day.jpg' : 'night.jpg';
+    String bgImage = data['isDayTime'] ? 'day.jpg' : 'moon.jfif';
     Color  bgColor = data['isDayTime'] ? Colors.blue : Colors.indigo[700];
 
     return Scaffold(

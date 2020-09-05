@@ -66,7 +66,11 @@ class _ChooseLocationState extends State<ChooseLocation> {
               child: Card(
                 child: ListTile(
                   onTap: () {
-                    updateTime(index);
+                    try{updateTime(index);}
+                    catch(e){
+                      print(e.toString());
+                      
+                    }
                   },
                   title: Text(locations[index].location),
                   leading: CircleAvatar(
@@ -89,7 +93,25 @@ class _ChooseLocationState extends State<ChooseLocation> {
           );
         },
       ),
-      
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+         dynamic result = await showModalBottomSheet(context: context, builder: (context) {
+            return  AddLocation();
+          });
+          setState(() {
+            locations.insert(
+              locations.length,
+              WorldTime(
+              location: result['location'],
+              url: result['url'],
+              flag: result['flag'],
+              )
+            );
+          });
+        },
+        child: Icon(Icons.add,size:40.0,),
+        backgroundColor: Colors.blue[900],
+        ),
     );
   }
 }
